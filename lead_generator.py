@@ -2,6 +2,7 @@ import os, requests, sys
 
 def main():
 
+
     if not os.path.exists('assets/api_key.txt'):
         print("Error: No API key file found. Creating 'assets/api_key.txt'")
         print("Please save your API key in the newly created file.")
@@ -15,14 +16,22 @@ def main():
         print("No API key found. Aborting")
         sys.exit()
 
+    term = input("Enter search term, coffee, pizza, etc.: ") or "coffee"
+    latitude = input("Enter latitude: ") or "30.4020695" #defaults to the domain
+    longitude = input("Enter longitude: ") or "-97.7280716" #defaults to the domain
 
-    latitude = "30.4020695"
-    longitude = "-97.7280716"
+    while True:
+        term = input("Enter search term, coffee, pizza, etc.: ") or "coffee" #defaults to coffee
+        latitude = input("Enter latitude: ") or "30.4020695"
+        longitude = input("Enter longitude: ") or "-97.7280716"
+        print("Latitude: ", latitude, " | Longitude: ", longitude, " | search term: ", term)
+        correct = input("Are these correct? (y/n)" ).lower() or "y"
+        if correct[:1] is "y":
+            break
 
+    print("Searching for nearby {} places".format(term))
     headers = {'Authorization': "Bearer {}".format(yelp_api_key)}
-    #r = requests.get("https://api.yelp.com/v3/businesses/search?term=coffee&latitude="+latitude+"&longitude="+longitude, headers=headers)
-    r = requests.get("https://api.yelp.com/v3/businesses/search?term=coffee&latitude={}&longitude={}".format(latitude,longitude), headers=headers)
-    # r = requests.get("https://api.yelp.com/v3/businesses/search?term=coffee&latitude=30.4020695&longitude=-97.7280716"+longitude, headers=headers)
+    r = requests.get("https://api.yelp.com/v3/businesses/search?term={}&latitude={}&longitude={}".format(term, latitude,longitude), headers=headers)
 
     response = r.json()
     max_businesses = response['total']
