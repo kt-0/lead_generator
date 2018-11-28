@@ -16,14 +16,10 @@ def main():
         print("No API key found. Aborting")
         sys.exit()
 
-    term = input("Enter search term, coffee, pizza, etc.: ") or "coffee"
-    latitude = input("Enter latitude: ") or "30.4020695" #defaults to the domain
-    longitude = input("Enter longitude: ") or "-97.7280716" #defaults to the domain
-
     while True:
         term = input("Enter search term, coffee, pizza, etc.: ") or "coffee" #defaults to coffee
-        latitude = input("Enter latitude: ") or "30.4020695"
-        longitude = input("Enter longitude: ") or "-97.7280716"
+        latitude = input("Enter latitude: ") or "30.4020695" #defaults to the domain
+        longitude = input("Enter longitude: ") or "-97.7280716" #defaults to the domain
         print("Latitude: ", latitude, " | Longitude: ", longitude, " | search term: ", term)
         correct = input("Are these correct? (y/n)" ).lower() or "y"
         if correct[:1] is "y":
