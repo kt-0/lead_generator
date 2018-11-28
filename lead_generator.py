@@ -10,7 +10,6 @@ def main():
 
     with open('assets/api_key.txt', "r") as f:
         yelp_api_key = f.read()
-        print(yelp_api_key)
 
     if len(yelp_api_key) < 2:
         print("No API key found. Aborting")
